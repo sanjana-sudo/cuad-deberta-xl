@@ -11,8 +11,10 @@ st.set_page_config(layout="wide")
 
 st.cache(show_spinner=False, persist=True)
 def load_model():
-    model = AutoModelForQuestionAnswering.from_pretrained('../cuad-models/roberta-base/')
-    tokenizer = AutoTokenizer.from_pretrained('../cuad-models/roberta-base/', use_fast=False)
+    #model = AutoModelForQuestionAnswering.from_pretrained('../cuad-models/roberta-base/')
+    #tokenizer = AutoTokenizer.from_pretrained('../cuad-models/roberta-base/', use_fast=False)
+    model = AutoModelForQuestionAnswering.from_pretrained('../cuad-models/deberta-v2-xlarge/')
+    tokenizer = AutoTokenizer.from_pretrained('../cuad-models/deberta-v2-xlarge/', use_fast=False)
     return model, tokenizer
 
 st.cache(show_spinner=False, persist=True)
@@ -66,7 +68,8 @@ if (not len(paragraph)==0) and not (len(question)==0):
 	# start_index = torch.argmax(start_scores)
 	# end_index = torch.argmax(end_scores)
 	# answer = tokenizer.convert_tokens_to_string(tokens[start_index:end_index+1])
-	prediction = run_prediction(question, paragraph, '../cuad-models/roberta-base/')
+	#prediction = run_prediction(question, paragraph, '../cuad-models/roberta-base/')
+	prediction = run_prediction(question, paragraph, '../cuad-models/deberta-v2-xlarge/')
 	st.write("Answer: " + prediction.strip())
 	
 
